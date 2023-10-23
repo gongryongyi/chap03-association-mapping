@@ -1,16 +1,23 @@
 package com.ohgiraffers.section02.crud;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity(name = "section02_menu")    // 다른 패키지에 동일 이름의 클래스가 존재하면 오류 발생하므로 구분하기 위해 이름 지정
 @Table(name = "TBL_MENU")
+@SequenceGenerator(
+        name = "seq_menu_code_generator",
+        sequenceName = "SEQ_MENU_CODE",
+        initialValue = 100,
+        allocationSize = 1
+)
 public class Menu {
 
     @Id
     @Column(name = "MENU_CODE")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "seq_menu_code_generator"
+    )
     private int menuCode;
 
     @Column(name = "MENU_NAME")
